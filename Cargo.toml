@@ -7,4 +7,53 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+
+[dependencies.bevy]
+version = "0.7.0"
+
+# Note: Required due to use of `bevy_kira_audio`.
+#       See: <https://github.com/NiklasEi/bevy_kira_audio/blob/a08ee2a4e3719cfbffbbca5f3feb61690e2233c6/README.md#usage>
+default-features = false
+
+features = [
+#
+# "revert this[0] before releasing your game! Otherwise you will need to
+#  include libbevy_dylib alongside your game if you want it to run."
+#
+# [0] The "dynamic" feature.
+#
+# via <https://bevyengine.org/learn/book/getting-started/setup/#enable-fast-compiles-optional>
+#
+         "dynamic",
+#         "dynamic",
+
+    #
+    # Copy pasta of Bevy v0.7.0 default features via <https://github.com/bevyengine/bevy/blob/v0.7.0/Cargo.toml#L20-L29>
+    # as required by the need to not include `bevy_audio` & `vorbis` default features which clash
+    # with `bevy_kira_audio`.
+    #
+    "animation",
+    # "bevy_audio",
+    "bevy_gilrs",
+    "bevy_winit",
+    "render",
+    "png",
+    "hdr",
+    # "vorbis",
+    "x11",
+    "filesystem_watcher",
+
+    ]
+
 [dependencies]
+
+# TODO: Document/package dependencies, as per <https://github.com/mvlabat/bevy_egui#dependencies>.
+bevy_egui = "0.14.0"
+
+bevy-inspector-egui = "0.11.0"
+bevy_kira_audio = { version = "0.10.0", features = [ "flac", "wav" ] }
+
+heron = { version = "3.1.0", features = ["3d"] }
+
+bevy_hanabi = "0.2.0"
+bevy_tweening = "0.4.0"
