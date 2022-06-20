@@ -1,6 +1,12 @@
 
 use bevy::prelude::*;
 
+
+fn log_application_start_system() {
+    info!("Application startup...");
+}
+
+
 const APP_TITLE: &str = "Quacks Like a Dog (Rusty Jam #2)";
 
 pub fn start_app() {
@@ -11,6 +17,7 @@ pub fn start_app() {
 	    ..default()
 	})
 	.add_plugins(DefaultPlugins)
+	.add_startup_system(log_application_start_system)
 	.run();
 
 }
