@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+mod ui_title_menu;
+
 pub(crate) struct UiPlugin;
 
 impl Plugin for UiPlugin {
@@ -8,7 +10,10 @@ impl Plugin for UiPlugin {
 
         info!("Building `{}`...", "UiPlugin");
 
-        app.add_plugin(crate::ui_inspector::UiInspectorPlugin);
+        app //
+            .add_plugin(bevy_egui::EguiPlugin)
+            .add_plugin(crate::ui_inspector::UiInspectorPlugin)
+            .add_plugin(ui_title_menu::UiTitleMenuPlugin);
 
         //
     }
