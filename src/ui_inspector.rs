@@ -22,6 +22,8 @@ fn configure_from_environment_startup_system(
     mut ui_state: ResMut<UiInspectorState>,
     mut inspector_state: ResMut<bevy_inspector_egui::WorldInspectorParams>,
 ) {
+    info!("System setup...");
+
     ui_state.visible = !std::env::var_os("QLAD_INSPECTOR").is_none();
     inspector_state.enabled = ui_state.visible;
 }
