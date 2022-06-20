@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 
+mod ui_inspector; // TODO: Relocate this.
 mod ui_plugin;
 
 fn log_application_start_system() {
