@@ -1,0 +1,87 @@
+
+### via a previous <.cargo/config>
+
+## ===============================================
+#
+
+#
+# via <https://raw.githubusercontent.com/bevyengine/bevy/main/.cargo/config_fast_builds>
+#
+
+# Add the contents of this file to `config.toml` to enable "fast build" configuration. Please read the notes below.
+
+# NOTE: For maximum performance, build using a nightly compiler
+# If you are using rust stable, remove the "-Zshare-generics=y" below.
+
+[target.x86_64-unknown-linux-gnu]
+linker = "clang"
+rustflags = ["-Clink-arg=-fuse-ld=lld", "-Zshare-generics=y"]
+
+# NOTE: you must manually install https://github.com/michaeleisel/zld on mac. you can easily do this with the "brew" package manager:
+# `brew install michaeleisel/zld/zld`
+[target.x86_64-apple-darwin]
+rustflags = ["-C", "link-arg=-fuse-ld=/usr/local/bin/zld", "-Zshare-generics=y"]
+
+[target.aarch64-apple-darwin]
+rustflags = ["-C", "link-arg=-fuse-ld=/usr/local/bin/zld", "-Zshare-generics=y"]
+
+[target.x86_64-pc-windows-msvc]
+linker = "rust-lld.exe"
+rustflags = ["-Zshare-generics=n"]
+
+# Optional: Uncommenting the following improves compile times, but reduces the amount of debug info to 'line number tables only'
+# In most cases the gains are negligible, but if you are on macos and have slow compile times you should see significant gains.
+#[profile.dev]
+#debug = 1
+
+#
+## ===============================================
+
+
+## ===============================================
+#
+
+# via <https://bevy-cheatbook.github.io/pitfalls/performance.html#unoptimized-debug-builds>
+
+# Enable only a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+
+# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
+[profile.dev.package."*"]
+opt-level = 3
+
+#
+## ===============================================
+
+
+[build]
+rustc-wrapper = "sccache"
+
+
+[profile.release]
+strip=true
+#
+# Note: There is also `--remap-path-prefix=<match_path>=<replacement_path>` (or was `-Zremap-path-prefix=...`)
+#       but that didn't appear to change anything so either didn't work, or
+#       I configured it wrong or it wasn't necessary. :)
+#
+rustflags = ["-Zremap-cwd-prefix=."]
+
+#[env]
+#SCCACHE_RECACHE="1"
+
+[profile.release.package."*"]
+strip=true
+rustflags = ["-Zremap-cwd-prefix=."]
+
+#
+# Note: This was a failed attempt to workaround the `strip` issue
+#       which both doesn't work nor trigger a warning or error... :/
+#       (i.e. there is *no* support for per-target profile settings.)
+#
+# [profile.wasm32-unknown-unknown.release]
+# strip=false
+
+[target.wasm32-unknown-unknown]
+rustflags = ["-C", "strip=debuginfo"]
