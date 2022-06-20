@@ -1,6 +1,8 @@
 
 use bevy::prelude::*;
 
+mod ui_plugin;
+
 
 fn log_application_start_system() {
     info!("Application startup...");
@@ -17,6 +19,7 @@ pub fn start_app() {
 	    ..default()
 	})
 	.add_plugins(DefaultPlugins)
+	.add_plugin(ui_plugin::UiPlugin)
 	.add_startup_system(log_application_start_system)
 	.run();
 
