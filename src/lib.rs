@@ -15,6 +15,7 @@ pub fn start_app() {
             title: APP_TITLE.into(),
             ..default()
         })
+        .insert_resource(ClearColor(Color::BLACK))
         .add_plugins(DefaultPlugins)
         .add_plugin(ui_plugin::UiPlugin)
         .add_startup_system(log_application_start_system)
