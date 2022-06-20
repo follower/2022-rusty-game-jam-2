@@ -1,3 +1,5 @@
 fn main() {
-    println!("Hello, world!");
+
+    quacks_like_a_dog::start_app();
+
 }
