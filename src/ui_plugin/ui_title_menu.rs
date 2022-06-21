@@ -83,8 +83,15 @@ fn ui_title_menu(ui_state: ResMut<UiTitleMenuState>, mut egui_context: ResMut<Eg
             //
             ui.vertical_centered(|ui| {
                 ui.heading(
-                    egui::RichText::new("Quacks Like A Dog")
+                    egui::RichText::new("Quacks")
                         .color(egui::Color32::LIGHT_GRAY)
+                        .family(egui::FontFamily::Name("custom_font_01".into()))
+                        .size(256.0 * 0.8),
+                );
+                ui.heading(
+                    egui::RichText::new("LIKE A DOG")
+                        .color(egui::Color32::LIGHT_GRAY)
+                        .family(egui::FontFamily::Name("custom_font_01".into()))
                         .size(96.0),
                 );
             });
