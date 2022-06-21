@@ -38,6 +38,21 @@ fn ui_title_menu_setup(
 
     //
 
+    fonts.font_data.insert(
+        "custom_font_01".to_string(),
+        egui::FontData::from_static(include_bytes!(
+            "../../assets/fonts/Modak/Modak-Regular.ttf",
+        )),
+    );
+
+    fonts
+        .families
+        .entry(egui::FontFamily::Name("custom_font_01".into()))
+        .or_default()
+        .insert(0, "custom_font_01".to_string());
+
+    //
+
     egui_context.ctx_mut().set_fonts(fonts);
 
     ui_state.visible = true;
