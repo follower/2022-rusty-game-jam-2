@@ -42,3 +42,11 @@ jobs:
         if: runner.os == 'linux'
       - name: Build & run tests
         run: cargo test
+      - name: Build (for artifact)
+        run: cargo build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ runner.os }}-game-build-nightly-${{ hashFiles('**/Cargo.toml') }}-debug
+          path: |
+                target/debug/quacks_like_a_dog*
+                assets/
