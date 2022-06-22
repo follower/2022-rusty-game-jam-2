@@ -50,3 +50,5 @@ jobs:
           path: |
                 target/debug/quacks*
                 assets/
+                ~/.rustup/toolchains/*/lib/rustlib/*/*/libstd-* # Due to ??? (maybe same reason as below).
+                target/debug/deps/libbevy_dylib* # Due to use of Bevy's dynamic library feature
