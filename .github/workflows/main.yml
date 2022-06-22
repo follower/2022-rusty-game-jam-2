@@ -50,7 +50,11 @@ jobs:
         with:
           name: ${{ runner.os }}-game-build-nightly-${{ hashFiles('**/Cargo.toml') }}-debug
           path: |
-                target/debug/quacks*
+                target/debug/*
+                ./target/debug/deps/bevy_dylib-328cd9fe55c06e85.d
+                ./target/debug/deps/libbevy_dylib-328cd9fe55c06e85.so
+                /home/runner/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/libstd-91db243dd05c003b.so
                 assets/
+                /home/runner/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib/libstd*
                 ~/.rustup/toolchains/*/lib/rustlib/*/*/libstd-* # Due to ??? (maybe same reason as below).
                 target/debug/deps/libbevy_dylib* # Due to use of Bevy's dynamic library feature
