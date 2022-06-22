@@ -1,3 +1,4 @@
+#
 # Based on subset of <https://github.com/NiklasEi/bevy_game_template/blob/main/.github/workflows/ci.yml>
 #
 # Added `ubuntu-18.04` for widest LTS version support (avoids libc version issues).
