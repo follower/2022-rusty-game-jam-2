@@ -19,6 +19,8 @@ jobs:
       matrix:
         os: [ubuntu-18.04, ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
+    env:
+      RUSTC_WRAPPER: "" # Workaround sccache not being installed.    
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
