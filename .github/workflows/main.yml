@@ -16,6 +16,7 @@ on:
 jobs:
   test:
     strategy:
+      fail-fast: false    
       matrix:
         os: [ubuntu-18.04, ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
