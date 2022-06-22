@@ -46,6 +46,7 @@ jobs:
         run: cargo build
       - name: List files
         run: find .; find ~/.cargo; find ~/.rustup;
+        if: runner.os == 'linux'
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }}-game-build-nightly-${{ hashFiles('**/Cargo.toml') }}-debug
