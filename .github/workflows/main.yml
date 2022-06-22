@@ -48,5 +48,5 @@ jobs:
         with:
           name: ${{ runner.os }}-game-build-nightly-${{ hashFiles('**/Cargo.toml') }}-debug
           path: |
-                target/debug/quacks_like_a_dog*
+                target/debug/quacks*
                 assets/
