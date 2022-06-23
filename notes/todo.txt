@@ -14,7 +14,7 @@
 [x] Add level load override.
 [ ] Add level load override for WASM export?
 
-[ ] Configure initial camera location.
+[~] Configure initial camera location.
 [ ] Configure GLTF lights?
 
 [ ] Add title menu start.
@@ -24,7 +24,7 @@
 
 [ ] Add initial player character.
 [ ] Add initial dog item.
-[ ] Add initial chicken item.
+[ ] Add initial chicken/rooster item.
 [ ] Add initial player pet character?
 
 [ ] Add item potential location item markers.
