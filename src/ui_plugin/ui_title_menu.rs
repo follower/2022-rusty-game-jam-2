@@ -104,6 +104,10 @@ fn ui_title_menu(ui_state: ResMut<UiTitleMenuState>, mut egui_context: ResMut<Eg
         .show(ctx, |ui| {
             //
             ui.vertical_centered(|ui| {
+                //
+
+                ui.spacing_mut().item_spacing.y = 0.0;
+
                 ui.label(
                     egui::RichText::new("Quacks")
                         .color(egui::Color32::LIGHT_GRAY)
