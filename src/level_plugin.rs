@@ -7,6 +7,7 @@ pub(crate) struct LevelPlugin;
 #[derive(Default)]
 struct LevelState {
     visible: bool,
+    scene_path_override: Option<String>,
 }
 
 impl Plugin for LevelPlugin {
@@ -28,11 +29,20 @@ fn level_plugin_startup_system(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
+    mut level_state: ResMut<LevelState>,
     asset_server: Res<AssetServer>,
 ) {
     //
 
     info!("System setup...");
+
+    if let Some(scene_path) = std::env::var_os("QLAD_SECRET_LEVEL") {
+        level_state.scene_path_override = scene_path.into_string().ok();
+        info!(
+            "Found environment scene path override: {:?}",
+            &level_state.scene_path_override
+        );
+    }
 
     commands
         .spawn_bundle(TransformBundle::default())
@@ -64,8 +74,14 @@ fn level_plugin_startup_system(
                 .insert(Name::new("LoadedGltf"))
                 .with_children(|gltf_parent| {
                     //
-                    gltf_parent
-                        .spawn_scene(asset_server.load(DEFAULT_LEVEL_SCENE_PATH));
+                    gltf_parent.spawn_scene(
+                        asset_server.load(
+                            level_state
+                                .scene_path_override
+                                .as_ref()
+                                .unwrap_or(&DEFAULT_LEVEL_SCENE_PATH.to_string()),
+                        ),
+                    );
                     //
                 });
         });
