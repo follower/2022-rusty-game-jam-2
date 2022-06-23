@@ -70,11 +70,15 @@ fn level_plugin_startup_system(
                 ..default()
             });
 
-            parent.spawn_bundle(PbrBundle {
-                mesh: meshes.add(Mesh::from(shape::Cube::new(1.0))),
-                material: materials.add(Color::LIME_GREEN.into()),
-                ..default()
-            });
+            parent
+                .spawn_bundle(PbrBundle {
+                    mesh: meshes.add(Mesh::from(shape::Cube::new(1.0))),
+                    material: materials.add(Color::LIME_GREEN.into()),
+                    ..default()
+                })
+                .insert(Visibility {
+                    is_visible: level_state.scene_path_override.is_none(),
+                });
 
             //
         })
