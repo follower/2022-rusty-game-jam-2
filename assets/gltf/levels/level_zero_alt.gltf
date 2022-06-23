@@ -4,6 +4,7 @@
         "version" : "2.0"
     },
     "extensionsUsed" : [
+        "KHR_materials_unlit",
         "KHR_lights_punctual"
     ],
     "extensionsRequired" : [
@@ -14,23 +15,24 @@
             "lights" : [
                 {
                     "color" : [
-                        1,
-                        1,
-                        1
-                    ],
-                    "intensity" : 500,
-                    "type" : "point",
-                    "name" : "Light"
-                },
-                {
-                    "color" : [
                         0.24228084087371826,
                         0.3139885365962982,
                         0.14412856101989746
                     ],
                     "intensity" : 20,
                     "type" : "point",
-                    "name" : "Point"
+                    "name" : "PlayerPointLight"
+                },
+                {
+                    "color" : [
+                        1,
+                        1,
+                        1
+                    ],
+                    "intensity" : 250,
+                    "type" : "point",
+                    "range" : 4.5,
+                    "name" : "StreetLight"
                 }
             ]
         }
@@ -40,70 +42,15 @@
         {
             "name" : "Scene",
             "nodes" : [
-                0,
-                1,
                 2,
-                3,
-                6
+                7
             ]
         }
     ],
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "Ground"
-        },
-        {
-            "extensions" : {
-                "KHR_lights_punctual" : {
-                    "light" : 0
-                }
-            },
-            "name" : "Light",
-            "rotation" : [
-                -0.2841663062572479,
-                -0.34203392267227173,
-                0.7269423604011536,
-                0.5232754349708557
-            ],
-            "translation" : [
-                4.076245307922363,
-                1.0054539442062378,
-                5.903861999511719
-            ]
-        },
-        {
-            "mesh" : 1,
-            "name" : "KerbRight",
-            "translation" : [
-                0,
-                3.75,
-                0.10000000149011612
-            ]
-        },
-        {
-            "mesh" : 2,
-            "name" : "KerbLeft",
-            "rotation" : [
-                0,
-                0,
-                -1,
-                7.549790126404332e-08
-            ],
-            "translation" : [
-                0,
-                -3.75,
-                0.10000000149011612
-            ]
-        },
-        {
-            "mesh" : 3,
             "name" : "EyeHole",
-            "scale" : [
-                2,
-                1,
-                1
-            ],
             "translation" : [
                 0.5,
                 0.15000000596046448,
@@ -113,32 +60,134 @@
         {
             "extensions" : {
                 "KHR_lights_punctual" : {
-                    "light" : 1
+                    "light" : 0
                 }
             },
-            "name" : "Point",
+            "name" : "PlayerPointLight",
             "rotation" : [
                 -0.7071068286895752,
                 0,
                 0,
                 0.7071068286895752
+            ],
+            "translation" : [
+                0,
+                0,
+                -0.6999999284744263
             ]
         },
         {
             "children" : [
-                4,
-                5
+                0,
+                1
             ],
-            "mesh" : 4,
+            "mesh" : 1,
             "name" : "PlayerCharacter",
             "translation" : [
                 0,
                 0,
+                1.7000000476837158
+            ]
+        },
+        {
+            "mesh" : 2,
+            "name" : "Ground"
+        },
+        {
+            "mesh" : 3,
+            "name" : "KerbLeft",
+            "rotation" : [
+                0,
+                0,
+                -1,
+                7.549790836947068e-08
+            ],
+            "translation" : [
+                0,
+                -3.75,
+                0.10000000149011612
+            ]
+        },
+        {
+            "mesh" : 4,
+            "name" : "KerbRight",
+            "translation" : [
+                0,
+                3.75,
+                0.10000000149011612
+            ]
+        },
+        {
+            "extensions" : {
+                "KHR_lights_punctual" : {
+                    "light" : 1
+                }
+            },
+            "name" : "StreetLight",
+            "rotation" : [
+                -0.28416624665260315,
+                -0.3420339524745941,
+                0.7269423604011536,
+                0.5232754945755005
+            ],
+            "translation" : [
+                0,
+                2.0999999046325684,
+                4
+            ]
+        },
+        {
+            "children" : [
+                3,
+                4,
+                5,
+                6
+            ],
+            "name" : "Roadway",
+            "scale" : [
+                1,
+                0.6000000238418579,
                 1
             ]
         }
     ],
     "materials" : [
+        {
+            "extensions" : {
+                "KHR_materials_unlit" : {}
+            },
+            "name" : "EyeHoleMaterial",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.9
+            }
+        },
+        {
+            "alphaMode" : "BLEND",
+            "doubleSided" : true,
+            "emissiveFactor" : [
+                1,
+                1,
+                1
+            ],
+            "name" : "PlayerCharacterMaterial",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.949999988079071,
+                    0.949999988079071,
+                    0.949999988079071,
+                    0.10493826866149902
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.25
+            }
+        },
         {
             "doubleSided" : true,
             "name" : "GroundMaterial",
@@ -166,88 +215,9 @@
                 "metallicFactor" : 0,
                 "roughnessFactor" : 0.949999988079071
             }
-        },
-        {
-            "doubleSided" : true,
-            "name" : "EyeHoleMaterial",
-            "pbrMetallicRoughness" : {
-                "baseColorFactor" : [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                "metallicFactor" : 0,
-                "roughnessFactor" : 0.5
-            }
-        },
-        {
-            "alphaMode" : "BLEND",
-            "doubleSided" : true,
-            "emissiveFactor" : [
-                1,
-                1,
-                1
-            ],
-            "name" : "PlayerCharacterMaterial",
-            "pbrMetallicRoughness" : {
-                "baseColorFactor" : [
-                    0.949999988079071,
-                    0.949999988079071,
-                    0.949999988079071,
-                    0.10493826866149902
-                ],
-                "metallicFactor" : 0,
-                "roughnessFactor" : 0.25
-            }
         }
     ],
     "meshes" : [
-        {
-            "name" : "GroundMesh",
-            "primitives" : [
-                {
-                    "attributes" : {
-                        "POSITION" : 0,
-                        "NORMAL" : 1,
-                        "TANGENT" : 2,
-                        "TEXCOORD_0" : 3
-                    },
-                    "indices" : 4,
-                    "material" : 0
-                }
-            ]
-        },
-        {
-            "name" : "KerbMesh",
-            "primitives" : [
-                {
-                    "attributes" : {
-                        "POSITION" : 5,
-                        "NORMAL" : 6,
-                        "TANGENT" : 7,
-                        "TEXCOORD_0" : 8
-                    },
-                    "indices" : 9,
-                    "material" : 1
-                }
-            ]
-        },
-        {
-            "name" : "KerbMesh",
-            "primitives" : [
-                {
-                    "attributes" : {
-                        "POSITION" : 10,
-                        "NORMAL" : 11,
-                        "TANGENT" : 12,
-                        "TEXCOORD_0" : 13
-                    },
-                    "indices" : 9,
-                    "material" : 1
-                }
-            ]
-        },
         {
             "extras" : {
                 "Roundcube" : 1,
@@ -268,11 +238,11 @@
             "primitives" : [
                 {
                     "attributes" : {
-                        "POSITION" : 14,
-                        "NORMAL" : 15
+                        "POSITION" : 0,
+                        "NORMAL" : 1
                     },
-                    "indices" : 16,
-                    "material" : 2
+                    "indices" : 2,
+                    "material" : 0
                 }
             ]
         },
@@ -292,14 +262,59 @@
                 "odd_axis_align" : 0,
                 "no_limit" : 0
             },
-            "name" : "PlayerCharacterMesh",
+            "name" : "Mesh",
             "primitives" : [
                 {
                     "attributes" : {
-                        "POSITION" : 17,
-                        "NORMAL" : 18
+                        "POSITION" : 3,
+                        "NORMAL" : 4
                     },
-                    "indices" : 19,
+                    "indices" : 5,
+                    "material" : 1
+                }
+            ]
+        },
+        {
+            "name" : "GroundMesh",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 6,
+                        "NORMAL" : 7,
+                        "TANGENT" : 8,
+                        "TEXCOORD_0" : 9
+                    },
+                    "indices" : 10,
+                    "material" : 2
+                }
+            ]
+        },
+        {
+            "name" : "KerbMesh",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 11,
+                        "NORMAL" : 12,
+                        "TANGENT" : 13,
+                        "TEXCOORD_0" : 14
+                    },
+                    "indices" : 15,
+                    "material" : 3
+                }
+            ]
+        },
+        {
+            "name" : "KerbMesh",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 16,
+                        "NORMAL" : 17,
+                        "TANGENT" : 18,
+                        "TEXCOORD_0" : 19
+                    },
+                    "indices" : 15,
                     "material" : 3
                 }
             ]
@@ -308,6 +323,62 @@
     "accessors" : [
         {
             "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 3328,
+            "max" : [
+                -0.011310935020446777,
+                0.03802576661109924,
+                0.09442615509033203
+            ],
+            "min" : [
+                -0.04558587074279785,
+                -0.3380221128463745,
+                -0.1001737117767334
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 3328,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5123,
+            "count" : 4992,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 6658,
+            "max" : [
+                0.497050017118454,
+                0.497050017118454,
+                1.244773507118225
+            ],
+            "min" : [
+                -0.497050017118454,
+                -0.497050017118454,
+                -1.244773507118225
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5126,
+            "count" : 6658,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5123,
+            "count" : 39936,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 6,
             "componentType" : 5126,
             "count" : 24,
             "max" : [
@@ -323,265 +394,209 @@
             "type" : "VEC3"
         },
         {
-            "bufferView" : 1,
+            "bufferView" : 7,
             "componentType" : 5126,
             "count" : 24,
             "type" : "VEC3"
         },
         {
-            "bufferView" : 2,
+            "bufferView" : 8,
             "componentType" : 5126,
             "count" : 24,
             "type" : "VEC4"
         },
         {
-            "bufferView" : 3,
+            "bufferView" : 9,
             "componentType" : 5126,
             "count" : 24,
             "type" : "VEC2"
         },
         {
-            "bufferView" : 4,
+            "bufferView" : 10,
             "componentType" : 5123,
             "count" : 36,
             "type" : "SCALAR"
         },
         {
-            "bufferView" : 5,
-            "componentType" : 5126,
-            "count" : 96,
-            "max" : [
-                5,
-                1.25,
-                0.25
-            ],
-            "min" : [
-                -5,
-                -1.25,
-                -0.25
-            ],
-            "type" : "VEC3"
-        },
-        {
-            "bufferView" : 6,
-            "componentType" : 5126,
-            "count" : 96,
-            "type" : "VEC3"
-        },
-        {
-            "bufferView" : 7,
-            "componentType" : 5126,
-            "count" : 96,
-            "type" : "VEC4"
-        },
-        {
-            "bufferView" : 8,
-            "componentType" : 5126,
-            "count" : 96,
-            "type" : "VEC2"
-        },
-        {
-            "bufferView" : 9,
-            "componentType" : 5123,
-            "count" : 132,
-            "type" : "SCALAR"
-        },
-        {
-            "bufferView" : 10,
-            "componentType" : 5126,
-            "count" : 96,
-            "max" : [
-                5,
-                1.25,
-                0.25
-            ],
-            "min" : [
-                -5,
-                -1.25,
-                -0.25
-            ],
-            "type" : "VEC3"
-        },
-        {
             "bufferView" : 11,
             "componentType" : 5126,
             "count" : 96,
+            "max" : [
+                5,
+                1.25,
+                0.25
+            ],
+            "min" : [
+                -5,
+                -1.25,
+                -0.25
+            ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 12,
             "componentType" : 5126,
             "count" : 96,
-            "type" : "VEC4"
+            "type" : "VEC3"
         },
         {
             "bufferView" : 13,
             "componentType" : 5126,
             "count" : 96,
-            "type" : "VEC2"
+            "type" : "VEC4"
         },
         {
             "bufferView" : 14,
             "componentType" : 5126,
-            "count" : 3328,
-            "max" : [
-                -0.002316907048225403,
-                0.04717373847961426,
-                0.09772688150405884
-            ],
-            "min" : [
-                -0.02551223337650299,
-                -0.3471737205982208,
-                -0.10000014305114746
-            ],
-            "type" : "VEC3"
+            "count" : 96,
+            "type" : "VEC2"
         },
         {
             "bufferView" : 15,
-            "componentType" : 5126,
-            "count" : 3328,
-            "type" : "VEC3"
+            "componentType" : 5123,
+            "count" : 132,
+            "type" : "SCALAR"
         },
         {
             "bufferView" : 16,
-            "componentType" : 5123,
-            "count" : 4992,
-            "type" : "SCALAR"
+            "componentType" : 5126,
+            "count" : 96,
+            "max" : [
+                5,
+                1.25,
+                0.25
+            ],
+            "min" : [
+                -5,
+                -1.25,
+                -0.25
+            ],
+            "type" : "VEC3"
         },
         {
             "bufferView" : 17,
             "componentType" : 5126,
-            "count" : 418,
-            "max" : [
-                0.5,
-                0.5,
-                1.25
-            ],
-            "min" : [
-                -0.5,
-                -0.5,
-                -1.25
-            ],
+            "count" : 96,
             "type" : "VEC3"
         },
         {
             "bufferView" : 18,
             "componentType" : 5126,
-            "count" : 418,
-            "type" : "VEC3"
+            "count" : 96,
+            "type" : "VEC4"
         },
         {
             "bufferView" : 19,
-            "componentType" : 5123,
-            "count" : 2496,
-            "type" : "SCALAR"
+            "componentType" : 5126,
+            "count" : 96,
+            "type" : "VEC2"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 288,
+            "byteLength" : 39936,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 288,
-            "byteOffset" : 288
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 384,
-            "byteOffset" : 576
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 192,
-            "byteOffset" : 960
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 72,
-            "byteOffset" : 1152
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 1152,
-            "byteOffset" : 1224
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 1152,
-            "byteOffset" : 2376
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 1536,
-            "byteOffset" : 3528
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 768,
-            "byteOffset" : 5064
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 264,
-            "byteOffset" : 5832
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 1152,
-            "byteOffset" : 6096
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 1152,
-            "byteOffset" : 7248
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 1536,
-            "byteOffset" : 8400
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 768,
-            "byteOffset" : 9936
-        },
-        {
-            "buffer" : 0,
             "byteLength" : 39936,
-            "byteOffset" : 10704
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 39936,
-            "byteOffset" : 50640
+            "byteOffset" : 39936
         },
         {
             "buffer" : 0,
             "byteLength" : 9984,
-            "byteOffset" : 90576
+            "byteOffset" : 79872
         },
         {
             "buffer" : 0,
-            "byteLength" : 5016,
-            "byteOffset" : 100560
+            "byteLength" : 79896,
+            "byteOffset" : 89856
         },
         {
             "buffer" : 0,
-            "byteLength" : 5016,
-            "byteOffset" : 105576
+            "byteLength" : 79896,
+            "byteOffset" : 169752
         },
         {
             "buffer" : 0,
-            "byteLength" : 4992,
-            "byteOffset" : 110592
+            "byteLength" : 79872,
+            "byteOffset" : 249648
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 288,
+            "byteOffset" : 329520
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 288,
+            "byteOffset" : 329808
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 384,
+            "byteOffset" : 330096
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 192,
+            "byteOffset" : 330480
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 72,
+            "byteOffset" : 330672
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1152,
+            "byteOffset" : 330744
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1152,
+            "byteOffset" : 331896
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1536,
+            "byteOffset" : 333048
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 768,
+            "byteOffset" : 334584
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 264,
+            "byteOffset" : 335352
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1152,
+            "byteOffset" : 335616
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1152,
+            "byteOffset" : 336768
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1536,
+            "byteOffset" : 337920
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 768,
+            "byteOffset" : 339456
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 115584,
+            "byteLength" : 340224,
             "uri" : "level_zero_alt.bin"
         }
     ]
