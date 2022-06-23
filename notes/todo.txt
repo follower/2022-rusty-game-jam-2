@@ -9,8 +9,13 @@
 [ ] Add Mac CI export?
 [ ] Tidy up other CI exports?
 
+[ ] Add CLI level export?
+
 [x] Add level load override.
 [ ] Add level load override for WASM export?
+
+[ ] Configure initial camera location.
+[ ] Configure GLTF lights?
 
 [ ] Add title menu start.
 [ ] Add title menu quit.
