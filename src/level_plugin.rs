@@ -24,6 +24,7 @@ impl Plugin for LevelPlugin {
 }
 
 const DEFAULT_LEVEL_SCENE_PATH: &str = "gltf/levels/level_zero.gltf#Scene0";
+const DEFAULT_LEVEL_CAMERA_HEIGHT: f32 = 30.0;
 
 fn level_plugin_startup_system(
     mut commands: Commands,
@@ -56,7 +57,8 @@ fn level_plugin_startup_system(
             });
 
             parent.spawn_bundle(PerspectiveCameraBundle {
-                transform: Transform::from_xyz(0.0, 0.0, 7.0).looking_at(Vec3::ZERO, Vec3::Y),
+                transform: Transform::from_xyz(0.0, 0.0, DEFAULT_LEVEL_CAMERA_HEIGHT)
+                    .looking_at(Vec3::ZERO, Vec3::Y),
                 ..default()
             });
 
