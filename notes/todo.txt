@@ -9,7 +9,7 @@
 [ ] Add Mac CI export?
 [ ] Tidy up other CI exports?
 
-[ ] Add level load override.
+[x] Add level load override.
 [ ] Add level load override for WASM export?
 
 [ ] Add title menu start.
