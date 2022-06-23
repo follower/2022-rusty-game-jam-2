@@ -1,0 +1,38 @@
+# TODOs
+
+[ ] Create game page.
+[ ] Upload submission.
+[ ] Submit entry.
+
+[ ] Handle Linux executable permissions issue in CI.
+[ ] Add WASM CI export?
+[ ] Add Mac CI export?
+[ ] Tidy up other CI exports?
+
+[ ] Add level load override.
+[ ] Add level load override for WASM export?
+
+[ ] Add title menu start.
+[ ] Add title menu quit.
+[ ] Add title menu credits.
+[ ] Add title menu options?
+
+[ ] Add initial player character.
+[ ] Add initial dog item.
+[ ] Add initial chicken item.
+[ ] Add initial player pet character?
+
+[ ] Add item potential location item markers.
+[ ] Add roads.
+[ ] Add road blocks.
+[ ] Add street lights?
+[ ] Add buildings?
+[ ] Add laundry?
+
+[ ] Add player movement.
+
+[ ] Add juice?
+[ ] Add sound.
+[ ] Add music.
+
+[ ] Add/document level creation?
