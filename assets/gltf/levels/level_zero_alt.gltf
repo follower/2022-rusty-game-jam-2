@@ -43,7 +43,8 @@
             "name" : "Scene",
             "nodes" : [
                 2,
-                7
+                7,
+                8
             ]
         }
     ],
@@ -149,6 +150,15 @@
                 0.6000000238418579,
                 1
             ]
+        },
+        {
+            "mesh" : 5,
+            "name" : "EyeHole mesh normals comment",
+            "translation" : [
+                -7.83004093170166,
+                5.813534736633301,
+                -0.46370476484298706
+            ]
         }
     ],
     "materials" : [
@@ -214,6 +224,20 @@
                 ],
                 "metallicFactor" : 0,
                 "roughnessFactor" : 0.949999988079071
+            }
+        },
+        {
+            "doubleSided" : true,
+            "name" : "Material",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.8000000715255737,
+                    0.016744349151849747,
+                    0.08439595252275467,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.4000000059604645
             }
         }
     ],
@@ -316,6 +340,21 @@
                     },
                     "indices" : 15,
                     "material" : 3
+                }
+            ]
+        },
+        {
+            "name" : "EyeHole mesh comment",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 20,
+                        "NORMAL" : 21,
+                        "TANGENT" : 22,
+                        "TEXCOORD_0" : 23
+                    },
+                    "indices" : 24,
+                    "material" : 4
                 }
             ]
         }
@@ -490,6 +529,46 @@
             "componentType" : 5126,
             "count" : 96,
             "type" : "VEC2"
+        },
+        {
+            "bufferView" : 20,
+            "componentType" : 5126,
+            "count" : 26592,
+            "max" : [
+                8.528818130493164,
+                0.19753248989582062,
+                0
+            ],
+            "min" : [
+                -1.09514319896698,
+                -1.49419105052948,
+                0
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 21,
+            "componentType" : 5126,
+            "count" : 26592,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 22,
+            "componentType" : 5126,
+            "count" : 26592,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 23,
+            "componentType" : 5126,
+            "count" : 26592,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 24,
+            "componentType" : 5123,
+            "count" : 58779,
+            "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
@@ -592,11 +671,36 @@
             "buffer" : 0,
             "byteLength" : 768,
             "byteOffset" : 339456
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 319104,
+            "byteOffset" : 340224
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 319104,
+            "byteOffset" : 659328
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 425472,
+            "byteOffset" : 978432
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 212736,
+            "byteOffset" : 1403904
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 117558,
+            "byteOffset" : 1616640
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 340224,
+            "byteLength" : 1734200,
             "uri" : "level_zero_alt.bin"
         }
     ]
