@@ -42,9 +42,7 @@ fn ui_title_menu_setup(
 
     fonts.font_data.insert(
         "custom_font_01".to_string(),
-        egui::FontData::from_static(include_bytes!(
-            "../../assets/fonts/Modak/Modak-Regular.ttf",
-        )),
+        egui::FontData::from_static(include_bytes!("../../assets/fonts/Modak/Modak-Regular.ttf",)),
     );
 
     fonts
