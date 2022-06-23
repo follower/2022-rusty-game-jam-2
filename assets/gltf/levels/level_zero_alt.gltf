@@ -155,7 +155,6 @@
             "extras" : {
                 "comment" : "The eyehole mesh normals edit modifier was required to avoid the back of the eye holes appearing inside the head. // Bevy can do front-face culling but Blender seemed not to be able to export that to GLTF. // See also: https://docs.blender.org/manual/en/3.2/modeling/modifiers/modify/normal_edit.html"
             },
-            "mesh" : 5,
             "name" : "EyeHole mesh normals comment",
             "translation" : [
                 -7.83004093170166,
@@ -227,20 +226,6 @@
                 ],
                 "metallicFactor" : 0,
                 "roughnessFactor" : 0.949999988079071
-            }
-        },
-        {
-            "doubleSided" : true,
-            "name" : "Material",
-            "pbrMetallicRoughness" : {
-                "baseColorFactor" : [
-                    0.8000000715255737,
-                    0.016744349151849747,
-                    0.08439595252275467,
-                    1
-                ],
-                "metallicFactor" : 0,
-                "roughnessFactor" : 0.4000000059604645
             }
         }
     ],
@@ -343,21 +328,6 @@
                     },
                     "indices" : 15,
                     "material" : 3
-                }
-            ]
-        },
-        {
-            "name" : "EyeHole mesh comment",
-            "primitives" : [
-                {
-                    "attributes" : {
-                        "POSITION" : 20,
-                        "NORMAL" : 21,
-                        "TANGENT" : 22,
-                        "TEXCOORD_0" : 23
-                    },
-                    "indices" : 24,
-                    "material" : 4
                 }
             ]
         }
@@ -532,46 +502,6 @@
             "componentType" : 5126,
             "count" : 96,
             "type" : "VEC2"
-        },
-        {
-            "bufferView" : 20,
-            "componentType" : 5126,
-            "count" : 26320,
-            "max" : [
-                10.132962226867676,
-                0.23044103384017944,
-                0
-            ],
-            "min" : [
-                -1.0943340063095093,
-                -1.4098279476165771,
-                0
-            ],
-            "type" : "VEC3"
-        },
-        {
-            "bufferView" : 21,
-            "componentType" : 5126,
-            "count" : 26320,
-            "type" : "VEC3"
-        },
-        {
-            "bufferView" : 22,
-            "componentType" : 5126,
-            "count" : 26320,
-            "type" : "VEC4"
-        },
-        {
-            "bufferView" : 23,
-            "componentType" : 5126,
-            "count" : 26320,
-            "type" : "VEC2"
-        },
-        {
-            "bufferView" : 24,
-            "componentType" : 5123,
-            "count" : 58803,
-            "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
@@ -674,36 +604,11 @@
             "buffer" : 0,
             "byteLength" : 768,
             "byteOffset" : 339456
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 315840,
-            "byteOffset" : 340224
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 315840,
-            "byteOffset" : 656064
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 421120,
-            "byteOffset" : 971904
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 210560,
-            "byteOffset" : 1393024
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 117606,
-            "byteOffset" : 1603584
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 1721192,
+            "byteLength" : 340224,
             "uri" : "level_zero_alt.bin"
         }
     ]
