@@ -1,3 +1,5 @@
+#![allow(unused_variables, unused_mut, /*dead_code*/)]
+
 use bevy::prelude::*;
 
 use bevy_egui::egui;
