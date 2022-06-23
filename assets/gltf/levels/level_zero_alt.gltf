@@ -43,8 +43,7 @@
             "name" : "Scene",
             "nodes" : [
                 2,
-                7,
-                8
+                7
             ]
         }
     ],
@@ -149,17 +148,6 @@
                 1,
                 0.6000000238418579,
                 1
-            ]
-        },
-        {
-            "extras" : {
-                "comment" : "The eyehole mesh normals edit modifier was required to avoid the back of the eye holes appearing inside the head. // Bevy can do front-face culling but Blender seemed not to be able to export that to GLTF. // See also: https://docs.blender.org/manual/en/3.2/modeling/modifiers/modify/normal_edit.html"
-            },
-            "name" : "EyeHole mesh normals comment",
-            "translation" : [
-                -7.83004093170166,
-                5.813534736633301,
-                -0.46370476484298706
             ]
         }
     ],
