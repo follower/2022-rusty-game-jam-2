@@ -51,10 +51,18 @@ fn level_plugin_startup_system(
         .with_children(|parent| {
             //
 
-            parent.spawn_bundle(PointLightBundle {
-                transform: Transform::from_xyz(0.0, 2.0, 2.0),
-                ..default()
-            });
+            parent
+                .spawn_bundle(PointLightBundle {
+                    point_light: PointLight {
+                        shadows_enabled: true,
+                        ..default()
+                    },
+                    transform: Transform::from_xyz(0.0, 2.0, 2.0),
+                    ..default()
+                })
+                .insert(Visibility {
+                    is_visible: level_state.scene_path_override.is_none(),
+                });
 
             parent.spawn_bundle(PerspectiveCameraBundle {
                 transform: Transform::from_xyz(0.0, 0.0, DEFAULT_LEVEL_CAMERA_HEIGHT)
