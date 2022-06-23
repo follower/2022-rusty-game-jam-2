@@ -152,6 +152,9 @@
             ]
         },
         {
+            "extras" : {
+                "comment" : "The eyehole mesh normals edit modifier was required to avoid the back of the eye holes appearing inside the head. // Bevy can do front-face culling but Blender seemed not to be able to export that to GLTF. // See also: https://docs.blender.org/manual/en/3.2/modeling/modifiers/modify/normal_edit.html"
+            },
             "mesh" : 5,
             "name" : "EyeHole mesh normals comment",
             "translation" : [
@@ -533,15 +536,15 @@
         {
             "bufferView" : 20,
             "componentType" : 5126,
-            "count" : 26592,
+            "count" : 26320,
             "max" : [
-                8.528818130493164,
-                0.19753248989582062,
+                10.132962226867676,
+                0.23044103384017944,
                 0
             ],
             "min" : [
-                -1.09514319896698,
-                -1.49419105052948,
+                -1.0943340063095093,
+                -1.4098279476165771,
                 0
             ],
             "type" : "VEC3"
@@ -549,25 +552,25 @@
         {
             "bufferView" : 21,
             "componentType" : 5126,
-            "count" : 26592,
+            "count" : 26320,
             "type" : "VEC3"
         },
         {
             "bufferView" : 22,
             "componentType" : 5126,
-            "count" : 26592,
+            "count" : 26320,
             "type" : "VEC4"
         },
         {
             "bufferView" : 23,
             "componentType" : 5126,
-            "count" : 26592,
+            "count" : 26320,
             "type" : "VEC2"
         },
         {
             "bufferView" : 24,
             "componentType" : 5123,
-            "count" : 58779,
+            "count" : 58803,
             "type" : "SCALAR"
         }
     ],
@@ -674,33 +677,33 @@
         },
         {
             "buffer" : 0,
-            "byteLength" : 319104,
+            "byteLength" : 315840,
             "byteOffset" : 340224
         },
         {
             "buffer" : 0,
-            "byteLength" : 319104,
-            "byteOffset" : 659328
+            "byteLength" : 315840,
+            "byteOffset" : 656064
         },
         {
             "buffer" : 0,
-            "byteLength" : 425472,
-            "byteOffset" : 978432
+            "byteLength" : 421120,
+            "byteOffset" : 971904
         },
         {
             "buffer" : 0,
-            "byteLength" : 212736,
-            "byteOffset" : 1403904
+            "byteLength" : 210560,
+            "byteOffset" : 1393024
         },
         {
             "buffer" : 0,
-            "byteLength" : 117558,
-            "byteOffset" : 1616640
+            "byteLength" : 117606,
+            "byteOffset" : 1603584
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 1734200,
+            "byteLength" : 1721192,
             "uri" : "level_zero_alt.bin"
         }
     ]
