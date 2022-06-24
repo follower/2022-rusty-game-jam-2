@@ -205,8 +205,42 @@ fn ui_title_menu(
         .show(ctx, |ui| {
             //
 
+            let mut spacer_size = 0.0;
+
             ui.horizontal(|ui| {
                 //
+
+                ui.set_visible(false); //
+
+                ui.spacing_mut().item_spacing = [ui_theme.button_padding[0], 0.0].into();
+
+                let tmp = ui_theme.button_padding[1];
+                ui_theme.button_padding[1] = 0.0;
+
+                if ui_theme.button(ui, "PLAY").clicked() {
+                }
+
+                if ui_theme.button(ui, "OPTIONS").clicked() {
+                }
+
+                if ui_theme.button(ui, "CREDITS").clicked() {
+                }
+
+                if ui_theme.button(ui, "QUIT").clicked() {
+                }
+
+                spacer_size = (ui.available_rect_before_wrap().width() / 2.0)
+                    + (ui.spacing_mut().item_spacing.x / 2.0); //
+
+                ui_theme.button_padding[1] = tmp;
+                //
+            });
+
+            //
+
+            ui.horizontal(|ui| {
+                //
+                ui.add_space(spacer_size);
 
                 ui.spacing_mut().item_spacing = ui_theme.button_padding.into();
 
