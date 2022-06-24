@@ -73,6 +73,26 @@ fn ui_title_menu_setup(
 
     //
 
+    fonts.font_data.insert(
+        "custom_font_03".to_string(),
+        egui::FontData::from_static(include_bytes!(
+            //"../../assets/fonts/Oswald/static/Oswald-Bold.ttf",
+            //"../../assets/fonts/Oswald/static/Oswald-SemiBold.ttf",
+            //"../../assets/fonts/Oswald/static/Oswald-ExtraLight.ttf",
+            //"../../assets/fonts/Oswald/static/Oswald-Light.ttf",
+            "../../assets/fonts/Oswald/static/Oswald-Medium.ttf",
+            //"../../assets/fonts/Oswald/static/Oswald-Regular.ttf",
+        )),
+    );
+
+    fonts
+        .families
+        .entry(egui::FontFamily::Name("custom_font_03".into()))
+        .or_default()
+        .insert(0, "custom_font_03".to_string());
+
+    //
+
     egui_context.ctx_mut().set_fonts(fonts);
 
     ui_state.visible = true;
