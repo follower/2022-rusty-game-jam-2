@@ -56,6 +56,7 @@ impl Plugin for UiTitleMenuPlugin {
         info!("Building `{}`...", "UiTitleMenuPlugin");
 
         app //
+            .init_resource::<UiTheme>()
             .init_resource::<UiTitleMenuState>()
             .add_startup_system(ui_title_menu_setup)
             .add_system(ui_title_menu);
@@ -67,6 +68,7 @@ impl Plugin for UiTitleMenuPlugin {
 fn ui_title_menu_setup(
     mut ui_state: ResMut<UiTitleMenuState>,
     mut egui_context: ResMut<EguiContext>,
+    mut ui_theme: ResMut<UiTheme>,
 ) {
     //
 
@@ -133,6 +135,12 @@ fn ui_title_menu_setup(
     egui_context.ctx_mut().set_fonts(fonts);
 
     ui_state.visible = true;
+
+    //
+
+    ui_theme.button_font_family_name = "custom_font_03".to_string();
+    ui_theme.button_font_size = 48.0;
+    ui_theme.button_padding = [24.0, 12.0];
 
     //
 }
