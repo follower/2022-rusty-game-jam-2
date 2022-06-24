@@ -191,4 +191,20 @@ fn ui_title_menu(
         });
 
     //
+
+    egui::TopBottomPanel::bottom("title_menu_bottom_panel")
+        .frame(egui::Frame {
+            inner_margin: egui::style::Margin {
+                left: 25.0,
+                top: 75.0,
+                right: 25.0,
+                bottom: 75.0,
+            },
+            ..default()
+        })
+        .show(ctx, |ui| {
+            //
+        });
+
+    //
 }
