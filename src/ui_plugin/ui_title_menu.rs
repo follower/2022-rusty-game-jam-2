@@ -145,7 +145,11 @@ fn ui_title_menu_setup(
     //
 }
 
-fn ui_title_menu(ui_state: ResMut<UiTitleMenuState>, mut egui_context: ResMut<EguiContext>) {
+fn ui_title_menu(
+    ui_state: ResMut<UiTitleMenuState>,
+    mut egui_context: ResMut<EguiContext>,
+    mut ui_theme: ResMut<UiTheme>,
+) {
     //
 
     let mut ctx = egui_context.ctx_mut();
