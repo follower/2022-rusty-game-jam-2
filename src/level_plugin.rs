@@ -23,7 +23,10 @@ impl Plugin for LevelPlugin {
     }
 }
 
+#[cfg(ignore)]
 const DEFAULT_LEVEL_SCENE_PATH: &str = "gltf/levels/level_zero.gltf#Scene0";
+const DEFAULT_LEVEL_SCENE_PATH: &str = "gltf/levels/level_zero_alt.gltf#Scene0";
+
 const DEFAULT_LEVEL_CAMERA_HEIGHT: f32 = 30.0;
 
 fn level_plugin_startup_system(
@@ -61,7 +64,9 @@ fn level_plugin_startup_system(
                     ..default()
                 })
                 .insert(Visibility {
+                    #[cfg(ignore)]
                     is_visible: level_state.scene_path_override.is_none(),
+                    is_visible: false,
                 });
 
             parent.spawn_bundle(PerspectiveCameraBundle {
@@ -77,7 +82,9 @@ fn level_plugin_startup_system(
                     ..default()
                 })
                 .insert(Visibility {
+                    #[cfg(ignore)]
                     is_visible: level_state.scene_path_override.is_none(),
+                    is_visible: false,
                 });
 
             //
