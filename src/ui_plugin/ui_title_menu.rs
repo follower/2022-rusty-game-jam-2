@@ -204,6 +204,30 @@ fn ui_title_menu(
         })
         .show(ctx, |ui| {
             //
+
+            ui.horizontal(|ui| {
+                //
+
+                ui.spacing_mut().item_spacing = ui_theme.button_padding.into();
+
+                if ui_theme.button(ui, "PLAY").clicked() {
+                    info!("clicked!")
+                }
+
+                if ui_theme.button(ui, "OPTIONS").clicked() {
+                    info!("clicked!")
+                }
+
+                if ui_theme.button(ui, "CREDITS").clicked() {
+                    info!("clicked!")
+                }
+
+                if ui_theme.button(ui, "QUIT").clicked() {
+                    info!("clicked!")
+                }
+
+                //
+            });
         });
 
     //
