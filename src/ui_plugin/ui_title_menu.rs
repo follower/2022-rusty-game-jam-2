@@ -114,6 +114,7 @@ fn ui_title_menu(
     ui_state: ResMut<UiTitleMenuState>,
     mut egui_context: ResMut<EguiContext>,
     mut ui_theme: ResMut<UiTheme>,
+    mut event_writer: EventWriter<bevy::app::AppExit>,
 ) {
     //
 
@@ -281,7 +282,10 @@ fn ui_title_menu(
                 }
 
                 if ui_theme.button(ui, "QUIT").clicked() {
-                    info!("clicked!")
+                    // TODO: Confirm exit?
+                    // TODO: Handle WASM better?
+                    info!("Player requested app exit...");
+                    event_writer.send(bevy::app::AppExit);
                 }
 
                 //
