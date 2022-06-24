@@ -22,6 +22,25 @@ impl Default for UiTheme {
     }
 }
 
+impl UiTheme {
+    //
+
+    fn button(&self, ui: &mut egui::Ui, label: &str) -> egui::Response {
+        //
+
+        ui.spacing_mut().button_padding = self.button_padding.into();
+
+        ui.button(
+            egui::RichText::new(label)
+                .family(egui::FontFamily::Name(
+                    self.button_font_family_name.clone().into(),
+                ))
+                .size(self.button_font_size),
+        )
+
+        //
+    }
+}
 
 #[derive(Default)]
 struct UiTitleMenuState {
