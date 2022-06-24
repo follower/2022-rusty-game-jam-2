@@ -5,6 +5,9 @@ use bevy::prelude::*;
 use bevy_egui::egui;
 use bevy_egui::EguiContext;
 
+use bevy_inspector_egui::Inspectable;
+
+#[derive(Inspectable)]
 struct UiTheme {
     //
     button_font_family_name: String,
