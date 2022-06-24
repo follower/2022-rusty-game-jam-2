@@ -113,7 +113,7 @@ fn ui_title_menu(ui_state: ResMut<UiTitleMenuState>, mut egui_context: ResMut<Eg
         .frame(egui::Frame {
             inner_margin: egui::style::Margin {
                 left: 25.0,
-                top: 75.0,
+                top: 0.0, // The title font has huge space above it, so no need to add even more.
                 right: 25.0,
                 bottom: 25.0,
             },
