@@ -64,7 +64,7 @@ fn configure_from_environment_startup_system(
 }
 
 fn configure_inspector_plugins_startup_system(
-    ui_state: ResMut<UiInspectorState>,
+    ui_state: Res<UiInspectorState>,
     mut inspector_windows: ResMut<InspectorWindows>,
 ) {
     //
