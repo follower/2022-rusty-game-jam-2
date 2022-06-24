@@ -2,6 +2,7 @@ use bevy::prelude::*;
 
 use bevy_egui::egui;
 use bevy_egui::EguiContext;
+
 use bevy_inspector_egui::egui::Align2;
 use bevy_inspector_egui::egui::CollapsingHeader;
 use bevy_inspector_egui::plugin::InspectorWindows;
