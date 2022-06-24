@@ -252,6 +252,8 @@ fn ui_title_menu(
             ui.horizontal(|ui| {
                 //
 
+                egui::trace!(ui, format!("{:?}", &ui.available_rect_before_wrap()));
+
                 ui.set_visible(false); //
 
                 ui.spacing_mut().item_spacing = [ui_theme.button_padding[0], 0.0].into();
@@ -271,8 +273,14 @@ fn ui_title_menu(
                 if ui_theme.button(ui, "QUIT").clicked() {
                 }
 
+                egui::trace!(ui, format!("{:?}", &ui.min_size()));
+                egui::trace!(ui, format!("{:?}", &ui.available_size()));
+                egui::trace!(ui, format!("{:?}", &ui.available_rect_before_wrap()));
+
                 spacer_size = (ui.available_rect_before_wrap().width() / 2.0)
                     + (ui.spacing_mut().item_spacing.x / 2.0); //
+
+                egui::trace!(ui, format!("{:?}", spacer_size));
 
                 ui_theme.button_padding[1] = tmp;
                 //
