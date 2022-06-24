@@ -18,7 +18,7 @@
 [ ] Configure GLTF lights?
 
 [ ] Add title menu start.
-[ ] Add title menu quit.
+[~] Add title menu quit.
 [ ] Add title menu credits.
 [ ] Add title menu options?
 
