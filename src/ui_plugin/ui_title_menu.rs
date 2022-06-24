@@ -273,13 +273,17 @@ fn ui_title_menu(
                     info!("clicked!")
                 }
 
-                if ui_theme.button(ui, "OPTIONS").clicked() {
-                    info!("clicked!")
-                }
-
-                if ui_theme.button(ui, "CREDITS").clicked() {
-                    info!("clicked!")
-                }
+                ui.scope(|ui| {
+                    //
+                    ui.set_enabled(false);
+                    if ui_theme.button(ui, "OPTIONS").clicked() {
+                        info!("clicked!")
+                    }
+                    if ui_theme.button(ui, "CREDITS").clicked() {
+                        info!("clicked!")
+                    }
+                    //
+                });
 
                 if ui_theme.button(ui, "QUIT").clicked() {
                     // TODO: Confirm exit?
