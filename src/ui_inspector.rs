@@ -56,7 +56,7 @@ fn configure_from_environment_startup_system(
     // Note: These really actually are enabled by default but have manually configured
     //       visibility in `configure_inspector_plugins_startup_system()`.
     //
-    ui_state.show_custom_inspector_plugins = !std::env::var_os("QLAD_INSPECTOR_PLUGINS").is_none();
+    ui_state.show_custom_inspector_plugins = std::env::var_os("QLAD_INSPECTOR_PLUGINS").is_some();
 
     ui_state.show_egui_debug_ui = !std::env::var_os("QLAD_EGUI_DEBUG").is_none();
 
