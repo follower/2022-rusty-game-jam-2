@@ -5,45 +5,7 @@ use bevy::prelude::*;
 use bevy_egui::egui;
 use bevy_egui::EguiContext;
 
-use bevy_inspector_egui::Inspectable;
-
-#[derive(Inspectable)]
-struct UiTheme {
-    //
-    button_font_family_name: String,
-    button_font_size: f32,
-    button_padding: [f32; 2],
-}
-
-impl Default for UiTheme {
-    fn default() -> Self {
-        Self {
-            button_font_family_name: "".to_string(),
-            button_font_size: 36.0,
-            button_padding: [16.0, 16.0],
-        }
-    }
-}
-
-impl UiTheme {
-    //
-
-    fn button(&self, ui: &mut egui::Ui, label: &str) -> egui::Response {
-        //
-
-        ui.spacing_mut().button_padding = self.button_padding.into();
-
-        ui.button(
-            egui::RichText::new(label)
-                .family(egui::FontFamily::Name(
-                    self.button_font_family_name.clone().into(),
-                ))
-                .size(self.button_font_size),
-        )
-
-        //
-    }
-}
+use super::UiTheme;
 
 #[derive(Default)]
 struct UiTitleMenuState {
