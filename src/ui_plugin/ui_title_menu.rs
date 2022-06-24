@@ -228,15 +228,19 @@ fn ui_title_menu(
                 ui_theme.button_padding[1] = 0.0;
 
                 if ui_theme.button(ui, "PLAY").clicked() {
+                    //
                 }
 
                 if ui_theme.button(ui, "OPTIONS").clicked() {
+                    //
                 }
 
                 if ui_theme.button(ui, "CREDITS").clicked() {
+                    //
                 }
 
                 if ui_theme.button(ui, "QUIT").clicked() {
+                    //
                 }
 
                 egui::trace!(ui, format!("{:?}", &ui.min_size()));
