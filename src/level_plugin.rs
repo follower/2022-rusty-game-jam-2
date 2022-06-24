@@ -27,7 +27,7 @@ impl Plugin for LevelPlugin {
 const DEFAULT_LEVEL_SCENE_PATH: &str = "gltf/levels/level_zero.gltf#Scene0";
 const DEFAULT_LEVEL_SCENE_PATH: &str = "gltf/levels/level_zero_alt.gltf#Scene0";
 
-const DEFAULT_LEVEL_CAMERA_HEIGHT: f32 = 30.0;
+const DEFAULT_LEVEL_CAMERA_HEIGHT: f32 = 20.0;
 
 fn level_plugin_startup_system(
     mut commands: Commands,
