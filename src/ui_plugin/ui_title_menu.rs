@@ -205,6 +205,48 @@ fn ui_title_menu(
         .show(ctx, |ui| {
             //
 
+            //
+            // This next section is a hack/workaround for egui's currently inability
+            // to center multiple/composite/non-atomic widgets.
+            //
+            // It works by first rendering the (mostly) identical widgets/code
+            // invisibly via `set_visible()`, determining how much horizontal
+            // space they consume when rendered, and then inserting half that
+            // space horizontally before rendering the widgets "for real" in
+            // the section after this.
+            //
+            // (See previous commit message for more details.)
+            //
+            // Some related issues/discussions on the topic:
+            //
+            //   * "improvement to columns, its all about the center #1664"
+            //     <https://github.com/emilk/egui/discussions/1664>
+            //
+            //   * "Investigate a multipass (two-pass) version of egui #843"
+            //     <https://github.com/emilk/egui/issues/843>
+            //
+            // I don't think this approach is likely to be particuularly viable
+            // for a general "proper" solution to the underlying issue as I'm
+            // literally copy-pasting code around in order to ensure I'm creating
+            // identical widgets--and that's probably more challenging to reliably
+            // achieve programmatically. :D
+            //
+            // And, of course, it requires keeping the two sections updated by
+            // hand when the UI changes--which I'm bound to forget at an inopportune time.
+            //
+            // Not to mention, when rendering the widgets invisibly, this approach
+            // literally wastes vertical screen real estate--which is perhaps
+            // computing's most valuable resource currently. #16:9IsAScam
+            //
+            // Additionally, for a more generic solution the performance impact
+            // needs to be factored into things.
+            //
+            // But for a functional workaround used in small doses it seems feasible.
+            // (And it did seem to work with composite/multi-subwidget widgets such
+            // as `Slider` which doesn't have the "atomic" special handling some
+            // widgets have IIRC).
+            //
+
             let mut spacer_size = 0.0;
 
             ui.horizontal(|ui| {
@@ -240,6 +282,15 @@ fn ui_title_menu(
 
             ui.horizontal(|ui| {
                 //
+
+                //
+                // TODO: Ensure the section above is updated whenever the UI
+                //       created in this section is changed.
+                //
+                //       Otherwise the result will (probably) not be centered
+                //       correctly.
+                //
+
                 ui.add_space(spacer_size);
 
                 ui.spacing_mut().item_spacing = ui_theme.button_padding.into();
