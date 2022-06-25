@@ -1,4 +1,4 @@
-#![allow(unused_variables, unused_mut, /*dead_code*/)]
+#![allow(unused_variables, unused_mut, non_snake_case, /*dead_code*/)]
 
 use bevy::{gltf::GltfExtras, prelude::*};
 use heron::prelude::*;
