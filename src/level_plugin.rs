@@ -1,5 +1,6 @@
 #![allow(unused_variables, unused_mut, non_snake_case, /*dead_code*/)]
 
+#[cfg(ignore)]
 use std::time::Instant;
 
 use bevy::{gltf::GltfExtras, prelude::*};
@@ -12,7 +13,9 @@ pub(crate) struct LevelPlugin;
 #[derive(Default)]
 struct LevelState {
     scene_path_override: Option<String>,
+    #[cfg(ignore)]
     duration__hack: Option<Instant>,
+    duration__hack: f32,
 }
 
 impl Plugin for LevelPlugin {
@@ -55,7 +58,11 @@ fn level_plugin_startup_system(
 
     info!("System setup...");
 
-    level_state.duration__hack = Some(Instant::now());
+    {
+        #![cfg(ignore)]
+        level_state.duration__hack = Some(Instant::now());
+    }
+    level_state.duration__hack = 0.0;
 
     if let Some(scene_path) = std::env::var_os("QLAD_SECRET_LEVEL") {
         level_state.scene_path_override = scene_path.into_string().ok();
@@ -239,15 +246,21 @@ fn move_player_character_on_title_screen__hack(
 
         let (entity, mut transform) = result;
 
-        transform.translation.x = -4.0
-            + ((level_state
-                .duration__hack
-                .expect("huh?")
-                .elapsed()
-                .as_secs_f32()
-                / 2.0)
-                % 2.0)
-                * 4.0;
+        level_state.duration__hack += 1.0 / 60.0;
+        {
+            #![cfg(ignore)]
+            transform.translation.x = -4.0
+                + ((level_state
+                    .duration__hack
+                    .expect("huh?")
+                    .elapsed()
+                    .as_secs_f32()
+                    / 2.0)
+                    % 2.0)
+                    * 4.0;
+        }
+
+        transform.translation.x = -4.0 + ((level_state.duration__hack / 2.0) % 2.0) * 4.0;
 
         //
     }
