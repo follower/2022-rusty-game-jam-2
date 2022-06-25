@@ -25,6 +25,7 @@ impl Plugin for LevelPlugin {
 
         app.add_system(debug_print_gltfextras);
 
+        #[cfg(ignore)]
         app.add_system(log_player_character);
 
         //
@@ -197,6 +198,7 @@ fn debug_print_gltfextras(
     //
 }
 
+#[cfg(ignore)]
 fn log_player_character(
     mut query: Query<(Entity, &mut Transform), (Changed<Transform>, With<PlayerCharacterMarker>)>,
 ) {
