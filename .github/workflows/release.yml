@@ -1,0 +1,239 @@
+#
+# Based on a subset of <https://github.com/bevyengine/bevy_github_ci_template/blob/36c06f25e726a095d3c302adc4fd72985a554e90/.github/workflows/release.yaml>
+#
+# (Also various changes via `main.yml`.)
+#
+
+name: Release
+
+
+on:
+  push:
+    tags:
+      - '*'
+
+  # Allows you to run this workflow manually from the Actions tab.
+  # (via GitHub starter template)
+  workflow_dispatch:
+
+
+env:
+
+  # update with the name of the main binary
+  binary: quacks-like-a-dog
+
+  RUSTC_WRAPPER: "" # Workaround sccache not being installed.
+
+
+jobs:
+
+  # Build for Linux
+  release-linux:
+
+    strategy:
+      fail-fast: false
+
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: little-core-labs/get-git-tag@v3.0.1
+        id: get_version
+      - uses: actions/checkout@v2
+
+      # ----
+
+      # TODO: Probably don't use this for "real" releases.
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-lts-cargo-build-release-nightly-${{ hashFiles('**/Cargo.toml') }}
+
+      # ----
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          target: x86_64-unknown-linux-gnu
+          override: true
+      - name: install dependencies
+        run: |
+          sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
+
+      - name: Build
+        run: |
+          cargo build --release --target x86_64-unknown-linux-gnu
+
+      - name: Prepare package
+        run: |
+          mkdir linux
+          cp target/x86_64-unknown-linux-gnu/release/${{ env.binary }} linux/
+          cp -r assets linux/
+      - name: Package as a zip # TODO: Fix execution permissions issue.
+        uses: vimtor/action-zip@v1
+        with:
+          files: linux
+          dest: ${{ env.binary }}.zip
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.binary }}-linux-lts-${{ steps.get_version.outputs.tag }}-${{ github.sha }}.zip
+          path: ${{ env.binary }}.zip
+
+
+      # TODO: Make a "real" release?
+
+#      - name: Upload binaries to release
+#        uses: svenstaro/upload-release-action@v2
+#        with:
+#          repo_token: ${{ secrets.GITHUB_TOKEN }}
+#          file: ${{ env.binary }}.zip
+#          asset_name: ${{ env.binary }}-linux-${{ steps.get_version.outputs.tag }}.zip
+#          tag: ${{ github.ref }}
+#          overwrite: true
+
+
+  # Build for Windows
+  release-windows:
+
+    strategy:
+      fail-fast: false
+
+    runs-on: windows-latest
+
+    steps:
+      - uses: little-core-labs/get-git-tag@v3.0.1
+        id: get_version
+      - uses: actions/checkout@v2
+
+      # ----
+
+      # TODO: Probably don't use this for "real" releases.
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-build-release-nightly-${{ hashFiles('**/Cargo.toml') }}
+
+      # ----
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          target: x86_64-pc-windows-msvc
+          override: true
+
+
+      - name: Build
+        run: |
+          cargo build --release --target x86_64-pc-windows-msvc
+
+      - name: Prepare package
+        run: |
+          mkdir windows
+          cp target/x86_64-pc-windows-msvc/release/${{ env.binary }}.exe windows/
+          cp -r assets windows/
+      - name: Package as a zip
+        uses: vimtor/action-zip@v1
+        with:
+          files: windows
+          dest: ${{ env.binary }}.zip
+
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.binary }}-windows-${{ steps.get_version.outputs.tag }}-${{ github.sha }}.zip
+          path: ${{ env.binary }}.zip
+
+
+      # TODO: Make a "real" release?
+
+#      - name: Upload binaries to release
+#        uses: svenstaro/upload-release-action@v2
+#        with:
+#          repo_token: ${{ secrets.GITHUB_TOKEN }}
+#          file: ${{ env.binary }}.zip
+#          asset_name: ${{ env.binary }}-windows-${{ steps.get_version.outputs.tag }}.zip
+#          tag: ${{ github.ref }}
+#          overwrite: true
+
+
+  # Build for wasm
+  release-wasm:
+
+    strategy:
+      fail-fast: false
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: little-core-labs/get-git-tag@v3.0.1
+        id: get_version
+      - uses: actions/checkout@v2
+
+      # ----
+
+      # TODO: Probably don't use this for "real" releases.
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-wasm-cargo-build-release-nightly-${{ hashFiles('**/Cargo.toml') }}
+
+      # ----
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          target: wasm32-unknown-unknown
+          override: true
+      - name: install wasm-bindgen-cli
+        run: |
+          cargo install wasm-bindgen-cli
+
+      - name: Build
+        run: |
+          cargo build --release --target wasm32-unknown-unknown
+
+      - name: Prepare package
+        run: |
+          wasm-bindgen --no-typescript --out-name bevy_game --out-dir wasm --target web target/wasm32-unknown-unknown/release/${{ env.binary }}.wasm
+          cp -r assets wasm/
+      - name: Package as a zip
+        uses: vimtor/action-zip@v1
+        with:
+          files: wasm
+          dest: ${{ env.binary }}.zip
+
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.binary }}-wasm-${{ steps.get_version.outputs.tag }}-${{ github.sha }}.zip
+          path: ${{ env.binary }}.zip
+
+
+      # TODO: Make a "real" release?
+
+#      - name: Upload binaries to release
+#        uses: svenstaro/upload-release-action@v2
+#        with:
+#          repo_token: ${{ secrets.GITHUB_TOKEN }}
+#          file: ${{ env.binary }}.zip
+#          asset_name: ${{ env.binary }}-wasm-${{ steps.get_version.outputs.tag }}.zip
+#          tag: ${{ github.ref }}
+#          overwrite: true
