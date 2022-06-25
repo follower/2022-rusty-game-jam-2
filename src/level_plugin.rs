@@ -132,7 +132,9 @@ fn configure_named_entities(
 
     for (mut entity, name, mut transform) in query.iter_mut() {
         //
+
         dbg!(entity, name, &transform);
+
         if name.as_str() == "PlayerCharacter" {
             commands.entity(entity).insert(PlayerCharacterMarker);
 
