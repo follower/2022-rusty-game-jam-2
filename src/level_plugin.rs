@@ -1,6 +1,7 @@
 #![allow(unused_variables, unused_mut, /*dead_code*/)]
 
 use bevy::{gltf::GltfExtras, prelude::*};
+use heron::prelude::*;
 
 pub(crate) struct LevelPlugin;
 
@@ -150,6 +151,9 @@ fn configure_named_entities(
     //
 }
 
+const PLAYER_INITIAL_ACCEL: Vec3 = Vec3::X; // Vec3::X * 0.0;
+const PLAYER_INITIAL_VELOCITY: Vec3 = Vec3::X; // Vec3::X * 0.5;
+
 fn configure_player_character(
     mut commands: Commands,
     mut query: Query<(Entity, &mut Transform), Added<PlayerCharacterMarker>>, // Note: The `Added<>` filter needs to be *outside* query tuple to actually _filter_ as intended!
@@ -166,6 +170,12 @@ fn configure_player_character(
         // TODO: Remove this hardcoded test code.
         transform.translation.x = -4.0;
         transform.translation.y = -2.2;
+
+        commands
+            .entity(entity)
+            .insert(RigidBody::Dynamic)
+            .insert(Acceleration::from_linear(PLAYER_INITIAL_ACCEL))
+            .insert(Velocity::from_linear(PLAYER_INITIAL_VELOCITY));
 
         //
     }
