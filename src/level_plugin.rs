@@ -1,5 +1,7 @@
 #![allow(unused_variables, unused_mut, non_snake_case, /*dead_code*/)]
 
+use std::time::Instant;
+
 use bevy::{gltf::GltfExtras, prelude::*};
 
 #[cfg(ignore)]
@@ -11,6 +13,7 @@ pub(crate) struct LevelPlugin;
 struct LevelState {
     visible: bool,
     scene_path_override: Option<String>,
+    duration__hack: Option<Instant>,
 }
 
 impl Plugin for LevelPlugin {
@@ -29,6 +32,8 @@ impl Plugin for LevelPlugin {
 
         #[cfg(ignore)]
         app.add_system(log_player_character);
+
+        app.add_system(move_player_character_on_title_screen__hack);
 
         //
     }
@@ -50,6 +55,8 @@ fn level_plugin_startup_system(
     //
 
     info!("System setup...");
+
+    level_state.duration__hack = Some(Instant::now());
 
     if let Some(scene_path) = std::env::var_os("QLAD_SECRET_LEVEL") {
         level_state.scene_path_override = scene_path.into_string().ok();
@@ -215,6 +222,33 @@ fn log_player_character(
         let (entity, mut transform) = result;
 
         info!("  x: {:?}", transform.translation.x);
+
+        //
+    }
+
+    //
+}
+
+fn move_player_character_on_title_screen__hack(
+    mut query: Query<(Entity, &mut Transform), (With<PlayerCharacterMarker>,)>,
+    mut level_state: ResMut<LevelState>,
+) {
+    //
+
+    for mut result in query.iter_mut() {
+        //
+
+        let (entity, mut transform) = result;
+
+        transform.translation.x = -4.0
+            + ((level_state
+                .duration__hack
+                .expect("huh?")
+                .elapsed()
+                .as_secs_f32()
+                / 2.0)
+                % 2.0)
+                * 4.0;
 
         //
     }
