@@ -1,6 +1,6 @@
 #![allow(unused_variables, unused_mut, /*dead_code*/)]
 
-use bevy::prelude::*;
+use bevy::{gltf::GltfExtras, prelude::*};
 
 pub(crate) struct LevelPlugin;
 
@@ -21,6 +21,8 @@ impl Plugin for LevelPlugin {
 
         app.add_system(configure_named_entities);
         app.add_system(configure_player_character);
+
+        app.add_system(debug_print_gltfextras);
 
         //
     }
@@ -148,6 +150,18 @@ fn configure_named_entities(
 fn configure_player_character(
     mut commands: Commands,
     mut query: Query<(Entity, &mut Transform), Added<PlayerCharacterMarker>>, // Note: The `Added<>` filter needs to be *outside* query tuple to actually _filter_ as intended!
+) {
+    //
+
+    for result in query.iter_mut() {
+        dbg!(result);
+    }
+
+    //
+}
+
+fn debug_print_gltfextras(
+    mut query: Query<(Entity, &GltfExtras), Added<GltfExtras>>, // Note: The `Added<>` filter needs to be *outside* query tuple to actually _filter_ as intended!
 ) {
     //
 
