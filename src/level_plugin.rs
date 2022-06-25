@@ -11,7 +11,6 @@ pub(crate) struct LevelPlugin;
 
 #[derive(Default)]
 struct LevelState {
-    visible: bool,
     scene_path_override: Option<String>,
     duration__hack: Option<Instant>,
 }
