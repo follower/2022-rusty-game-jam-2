@@ -111,7 +111,7 @@ fn ui_title_menu_setup(
 }
 
 fn ui_title_menu(
-    ui_state: ResMut<UiTitleMenuState>,
+    mut ui_state: ResMut<UiTitleMenuState>,
     mut egui_context: ResMut<EguiContext>,
     mut ui_theme: ResMut<UiTheme>,
     mut event_writer: EventWriter<bevy::app::AppExit>,
@@ -274,7 +274,8 @@ fn ui_title_menu(
                 ui.spacing_mut().item_spacing = ui_theme.button_padding.into();
 
                 if ui_theme.button(ui, "PLAY").clicked() {
-                    info!("clicked!")
+                    info!("clicked!");
+                    ui_state.visible = false; // TODO: Handle properly.
                 }
 
                 ui.scope(|ui| {
