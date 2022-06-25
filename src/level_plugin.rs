@@ -1,6 +1,8 @@
 #![allow(unused_variables, unused_mut, non_snake_case, /*dead_code*/)]
 
 use bevy::{gltf::GltfExtras, prelude::*};
+
+#[cfg(ignore)]
 use heron::prelude::*;
 
 pub(crate) struct LevelPlugin;
@@ -154,7 +156,9 @@ fn configure_named_entities(
     //
 }
 
+#[cfg(ignore)]
 const PLAYER_INITIAL_ACCEL: Vec3 = Vec3::X; // Vec3::X * 0.0;
+#[cfg(ignore)]
 const PLAYER_INITIAL_VELOCITY: Vec3 = Vec3::X; // Vec3::X * 0.5;
 
 fn configure_player_character(
@@ -174,6 +178,7 @@ fn configure_player_character(
         transform.translation.x = -4.0;
         transform.translation.y = -2.2;
 
+        #[cfg(ignore)]
         commands
             .entity(entity)
             .insert(RigidBody::Dynamic)
