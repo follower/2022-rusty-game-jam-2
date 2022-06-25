@@ -19,6 +19,8 @@ impl Plugin for LevelPlugin {
         app.init_resource::<LevelState>()
             .add_startup_system(level_plugin_startup_system);
 
+        app.add_system(configure_named_entities);
+
         //
     }
 }
@@ -107,4 +109,33 @@ fn level_plugin_startup_system(
                 });
         });
     //
+}
+
+//
+// Initial hacky attempt to integrate the Blender-produced
+// GLTF level files into the Bevy universe a bit more, automatically.
+//
+// TODO: Move this somewhere else?
+//
+
+#[derive(Component)]
+struct PlayerCharacterMarker;
+
+fn configure_named_entities(
+    mut commands: Commands,
+    mut query: Query<(Entity, &Name, &mut Transform), Added<Name>>, // Note: The `Added<>` filter needs to be *outside* query tuple to actually _filter_ as intended!
+) {
+    //
+
+    for (mut entity, name, mut transform) in query.iter_mut() {
+        //
+        dbg!(entity, name, &transform);
+        if name.as_str() == "PlayerCharacter" {
+            commands.entity(entity).insert(PlayerCharacterMarker);
+
+            // TODO: Remove this hardcoded test code.
+            transform.translation.x -= 4.0;
+            transform.translation.y -= 2.2;
+        }
+    }
 }
