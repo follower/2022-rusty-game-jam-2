@@ -158,6 +158,11 @@ fn ui_title_menu(
 
     //
 
+    #[cfg(ignore)]
+    if !ui_state.visible {
+        return;
+    }
+
     egui::TopBottomPanel::bottom("title_menu_bottom_panel")
         .frame(egui::Frame {
             inner_margin: egui::style::Margin {
