@@ -135,8 +135,13 @@ fn configure_named_entities(
 
         dbg!(entity, name, &transform);
 
-        if name.as_str() == "PlayerCharacter" {
-            commands.entity(entity).insert(PlayerCharacterMarker);
+        match name.as_str() {
+            "PlayerCharacter" => {
+                // TODO: When more marker components are added just return
+                //       the marker component from this matcher?
+                commands.entity(entity).insert(PlayerCharacterMarker);
+            }
+            _ => {}
         }
 
         //
