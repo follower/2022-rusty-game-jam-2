@@ -20,6 +20,7 @@ impl Plugin for LevelPlugin {
             .add_startup_system(level_plugin_startup_system);
 
         app.add_system(configure_named_entities);
+        app.add_system(configure_player_character);
 
         //
     }
@@ -139,6 +140,19 @@ fn configure_named_entities(
         }
 
         //
+    }
+
+    //
+}
+
+fn configure_player_character(
+    mut commands: Commands,
+    mut query: Query<(Entity, &mut Transform), Added<PlayerCharacterMarker>>, // Note: The `Added<>` filter needs to be *outside* query tuple to actually _filter_ as intended!
+) {
+    //
+
+    for result in query.iter_mut() {
+        dbg!(result);
     }
 
     //
