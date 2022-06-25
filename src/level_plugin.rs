@@ -137,5 +137,9 @@ fn configure_named_entities(
             transform.translation.x -= 4.0;
             transform.translation.y -= 2.2;
         }
+
+        //
     }
+
+    //
 }
