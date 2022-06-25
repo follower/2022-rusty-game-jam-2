@@ -1,3 +1,5 @@
+use bevy::gltf::GltfExtras;
+use bevy::pbr::LightEntity;
 use bevy::prelude::*;
 
 use bevy_egui::egui;
@@ -6,6 +8,8 @@ use bevy_egui::EguiContext;
 use bevy_inspector_egui::egui::Align2;
 use bevy_inspector_egui::egui::CollapsingHeader;
 use bevy_inspector_egui::plugin::InspectorWindows;
+use bevy_inspector_egui::widgets::InspectorQuery;
+use bevy_inspector_egui::Inspectable;
 
 use crate::ui_plugin::UiTheme;
 
@@ -36,7 +40,27 @@ impl Plugin for UiInspectorPlugin {
         app.add_plugin(bevy_inspector_egui::InspectorPlugin::<UiTheme>::new());
 
         //
+
+        inspector_query_build_helper(app);
+
+        //
     }
+}
+
+#[derive(Inspectable, Default)]
+struct CustomInspectorQueries {
+    gltf_extras: InspectorQuery<Entity, With<GltfExtras>>,
+
+    lights1: InspectorQuery<Entity, With<PointLight>>,
+    lights2: InspectorQuery<Entity, With<DirectionalLight>>,
+    lights3: InspectorQuery<Entity, With<LightEntity>>,
+
+    names: InspectorQuery<Entity, With<Name>>,
+}
+
+fn inspector_query_build_helper(app: &mut App) {
+    // via <https://docs.rs/bevy-inspector-egui/0.11.0/bevy_inspector_egui/widgets/struct.InspectorQuery.html>
+    app.add_plugin(bevy_inspector_egui::InspectorPlugin::<CustomInspectorQueries>::new());
 }
 
 fn configure_from_environment_startup_system(
@@ -89,6 +113,9 @@ fn configure_inspector_plugins_startup_system(
     //           <https://maz.digital/mastering-plugin-loadings-bevy-part-22>
     //
     let mut inspector_window_data = inspector_windows.window_data_mut::<UiTheme>();
+    inspector_window_data.visible = ui_state.show_custom_inspector_plugins;
+
+    let mut inspector_window_data = inspector_windows.window_data_mut::<CustomInspectorQueries>();
     inspector_window_data.visible = ui_state.show_custom_inspector_plugins;
 
     //
