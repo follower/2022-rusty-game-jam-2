@@ -164,8 +164,8 @@ fn configure_player_character(
         let (entity, mut transform) = result;
 
         // TODO: Remove this hardcoded test code.
-        transform.translation.x -= 4.0;
-        transform.translation.y -= 2.2;
+        transform.translation.x = -4.0;
+        transform.translation.y = -2.2;
 
         //
     }
