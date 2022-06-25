@@ -155,8 +155,11 @@ fn configure_player_character(
 ) {
     //
 
-    for result in query.iter_mut() {
-        dbg!(result);
+    for mut result in query.iter_mut() {
+        //
+
+        dbg!(&result);
+
     }
 
     //
