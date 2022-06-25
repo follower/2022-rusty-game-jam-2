@@ -137,7 +137,6 @@ fn configure_named_entities(
 
         if name.as_str() == "PlayerCharacter" {
             commands.entity(entity).insert(PlayerCharacterMarker);
-
         }
 
         //
@@ -162,6 +161,8 @@ fn configure_player_character(
         // TODO: Remove this hardcoded test code.
         transform.translation.x -= 4.0;
         transform.translation.y -= 2.2;
+
+        //
     }
 
     //
